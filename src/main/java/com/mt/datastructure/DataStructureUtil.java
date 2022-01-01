@@ -1,9 +1,6 @@
 package com.mt.datastructure;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DataStructureUtil {
 
@@ -41,18 +38,7 @@ public class DataStructureUtil {
 	}
 
 	public static void findTheMostUsedCharInString(String str) {
-		Map<Character, Integer> mapLetterToCount = new HashMap<>();
-		for (int i = 0; i < str.length(); i++) {
-			if (str.charAt(i) == ' ')
-				continue;
-			if (mapLetterToCount.get(str.charAt(i)) == null) {
-				mapLetterToCount.put(str.charAt(i), 1);
-			} else {
-				int count = mapLetterToCount.get(str.charAt(i));
-				count++;
-				mapLetterToCount.put(str.charAt(i), count);
-			}
-		}
+		Map<Character, Integer> mapLetterToCount = createLetterCountMap(str);
 
 		int maxCount = 0;
 		char maxChar = ' ';
@@ -65,6 +51,22 @@ public class DataStructureUtil {
 		System.out.println("Maximum used character for '" +
 				str + "' is : " + maxChar +
 				" and repeated " + maxCount + " times.");
+	}
+
+	public static Map<Character, Integer> createLetterCountMap(String str) {
+		Map<Character, Integer> mapLetterToCount = new HashMap<>();
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) == ' ')
+				continue;
+			if (mapLetterToCount.get(str.charAt(i)) == null) {
+				mapLetterToCount.put(str.charAt(i), 1);
+			} else {
+				int count = mapLetterToCount.get(str.charAt(i));
+				count++;
+				mapLetterToCount.put(str.charAt(i), count);
+			}
+		}
+		return mapLetterToCount;
 	}
 
 	public static int reverseInt(int number) {
@@ -140,5 +142,11 @@ public class DataStructureUtil {
 			System.out.println("Enter valid size for chunk");
 			return new int[0][0];
 		}
+	}
+
+	public static boolean isAnagram(String str1, String str2) {
+		Map<Character, Integer> firstMap = createLetterCountMap(str1.toLowerCase(Locale.ROOT));
+		Map<Character, Integer> secondMap = createLetterCountMap(str2.toLowerCase(Locale.ROOT));
+		return firstMap.equals(secondMap);
 	}
 }

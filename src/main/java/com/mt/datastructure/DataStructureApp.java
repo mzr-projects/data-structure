@@ -47,5 +47,11 @@ public class DataStructureApp {
 			System.out.println();
 		}
 
+		System.out.println("=============== Anagram");
+		boolean isAnagram = DataStructureUtil.isAnagram("rAil safeTy", "fairy tales");
+		if (isAnagram)
+			System.out.println("Two strings are Anagram");
+		else
+			System.out.println("Two strings are not Anagram");
 	}
 }
